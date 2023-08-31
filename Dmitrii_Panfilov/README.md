@@ -5,7 +5,7 @@
     <summary>Техническое задание</summary>
 <h4>Источники:</h4>
 <li><b><a href="https://docs.google.com/spreadsheets/d/1UDwTDX41NHL626aZpLGO4yvYDvX4P_wfL20kv6ekbD8/edit?usp=sharing">Диалоги оператор + клиент</a></b></li>
-<li><a href="https://docs.google.com/spreadsheets/d/1btiLDeliT87fFw4yI4aFMEthwL0GtUFMKAgGDW6ryOk/edit?usp=sharing">Список страниц</a>b></li>
+<li><b><a href="https://docs.google.com/spreadsheets/d/1btiLDeliT87fFw4yI4aFMEthwL0GtUFMKAgGDW6ryOk/edit?usp=sharing">Список страниц</a></b></li>
 
 <h4>Цель проекта:</h4> 
 Создать нейро-консультанта, отвечающего на вопросы клиентов организации по продуктам и услугам компании.
