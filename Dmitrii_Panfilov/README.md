@@ -2,7 +2,7 @@
 
 
 <details>
-<summary><b>💾 Техническое задание</b></summary>
+<summary><h2>💾 Техническое задание</h2></summary>
 <h3>🌐 Источники:</h3>
 <li><b><a href="https://docs.google.com/spreadsheets/d/1UDwTDX41NHL626aZpLGO4yvYDvX4P_wfL20kv6ekbD8/edit?usp=sharing">Диалоги оператор + клиент</a></b></li>
 <li><b><a href="https://docs.google.com/spreadsheets/d/1btiLDeliT87fFw4yI4aFMEthwL0GtUFMKAgGDW6ryOk/edit?usp=sharing">Список страниц</a></b></li>
