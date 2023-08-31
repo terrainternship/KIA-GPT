@@ -31,3 +31,7 @@
 1. Установка зависимости:
    ```bash
    pip install -r requirements.txt
+
+2. Для обучения:
+   ```bash
+   python3 algorithm/chatgpt_training.py
