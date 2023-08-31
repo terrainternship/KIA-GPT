@@ -1,0 +1,19 @@
+/neuro-consultant-bot
+|-- /data
+|   |-- /dialogues_operator_client
+|   |   |-- raw_data.csv
+|   |   |-- optimized_data.csv
+|   |-- /list_of_pages
+|       |-- pages_data.csv
+|-- /algorithm
+|   |-- chatgpt_training.py
+|   |-- chatgpt_tuning.py
+|-- /testing
+|   |-- test_questions_pool.csv
+|   |-- test_results.csv
+|-- /deployment
+|   |-- telegram_integration.py
+|   |-- devops_scripts/
+|-- README.md
+|-- requirements.txt
+|-- .gitignore
