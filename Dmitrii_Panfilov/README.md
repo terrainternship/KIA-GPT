@@ -4,8 +4,8 @@
 <details>
     <summary>Техническое задание</summary>
 <h4>Источники:</h4>
-1.**[Диалоги оператор + клиент](https://docs.google.com/spreadsheets/d/1UDwTDX41NHL626aZpLGO4yvYDvX4P_wfL20kv6ekbD8/edit?usp=sharing)**
-2.**[Список страниц](https://docs.google.com/spreadsheets/d/1btiLDeliT87fFw4yI4aFMEthwL0GtUFMKAgGDW6ryOk/edit?usp=sharing)**
+<li>1.**[Диалоги оператор + клиент](https://docs.google.com/spreadsheets/d/1UDwTDX41NHL626aZpLGO4yvYDvX4P_wfL20kv6ekbD8/edit?usp=sharing)**</li>
+<li>2.**[Список страниц](https://docs.google.com/spreadsheets/d/1btiLDeliT87fFw4yI4aFMEthwL0GtUFMKAgGDW6ryOk/edit?usp=sharing)**</li>
 
 <h4>Цель проекта:</h4> 
 Создать нейро-консультанта, отвечающего на вопросы клиентов организации по продуктам и услугам компании.
@@ -25,4 +25,4 @@
 <h4>Ожидаемые результаты:</h4>
 <b>Нейро-консультант, отвечающий на вопросы клиентов компании по продуктам и услугам.</b><br>
 ‌<b>Сроки проекта:</b> 3 месяца
-<details>
+</details>
