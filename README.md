@@ -1,3 +1,3 @@
 # KIA-GPT
 
-## Коллаб с алгоритмом берем тут andrey_sorokin/KIA.pybn
+ Коллаб с алгоритмом берем тут andrey_sorokin/KIA.ipybn
