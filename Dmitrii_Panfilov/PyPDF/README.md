@@ -1,8 +1,4 @@
-## PDF-QuestionBot: Your Go-To PDF Assistant 📄🤖
-
-### Overview 🌐
-
-Meet PDF-QuestionBot, a remarkable amalgamation of AI magic and PDF manipulation, designed to answer your PDF-related queries instantly. Built using Python, this Telegram bot is empowered by cutting-edge AI technologies like GPT-4, providing you with precise and coherent answers straight from your PDF documents. Whether you're a student searching for a quick excerpt from your lecture notes or a researcher navigating through a dense manual, PDF-QuestionBot makes your life easier!
+## PDF-QuestionBot: PDF Assistant 📄🤖
 
 ### Features ✨
 
