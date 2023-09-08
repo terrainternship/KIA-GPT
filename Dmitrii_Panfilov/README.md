@@ -1,11 +1,11 @@
 ## 💠 Проект Киа "Создание нейро-консультанта для ответов на вопросы клиентов"
 
 <details>
-<summary><h3>Whisper Транскрибация</h3></summary>
-<b><a href="https://colab.research.google.com/drive/1E-zR2zCRih5XkmhqL592cmijf1jWv-6S?usp=sharing">Google Colab Notebook</a></b>
-
-![image](https://github.com/terrainternship/KIA-GPT/assets/99917230/b89d1c06-6006-4fc8-a6bf-a51350207f66)
+    <summary>Whisper Транскрибация</summary>
+    <strong><a href="https://colab.research.google.com/drive/1E-zR2zCRih5XkmhqL592cmijf1jWv-6S?usp=sharing">Google Colab Notebook</a></strong>
+    <img src="https://github.com/terrainternship/KIA-GPT/assets/99917230/b89d1c06-6006-4fc8-a6bf-a51350207f66" alt="image" />
 </details>
+
 
 <details>
 <summary><h3>📆 Промежуточные результаты на [31.08.2023]: Транскрибация и Суммаризация Видео</h3></summary>
