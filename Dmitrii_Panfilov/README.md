@@ -1,7 +1,7 @@
 ## 💠 Проект Киа "Создание нейро-консультанта для ответов на вопросы клиентов"
 
 <details><summary><strong>💾 Ссылки на материалы</strong><p>
-<li>Whisper Транскрибация [Google Colab Notebook]<strong><a href="https://colab.research.google.com/drive/1E-zR2zCRih5XkmhqL592cmijf1jWv-6S?usp=sharing">Google Colab Notebook</a></strong></li>
+<li><strong><a href="https://colab.research.google.com/drive/1E-zR2zCRih5XkmhqL592cmijf1jWv-6S?usp=sharing">Whisper Транскрибация [Google Colab Notebook]</a></strong></li>
 <li></li>
 </p></details>
     
