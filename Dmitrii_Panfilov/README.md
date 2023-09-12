@@ -2,7 +2,7 @@
 
 <details><summary><strong>💾 Ссылки на материалы</strong><p>
 <li><strong><a href="https://colab.research.google.com/drive/1E-zR2zCRih5XkmhqL592cmijf1jWv-6S?usp=sharing">Whisper Транскрибация [Google Colab Notebook]</a></strong></li>
-<li></li>
+<li>2</li>
 </p></details>
     
 <details><summary>Пример Whisper Транскрибация</summary><p>
