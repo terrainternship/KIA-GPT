@@ -5,6 +5,7 @@
 <details>
     <summary><h2>💾 Ссылки на материалы</h2></summary><p>
 <li><strong><a href="https://raw.githubusercontent.com/terrainternship/KIA-GPT/main/Dmitrii_Panfilov/Kia_Solution_Model_v40.pdf">⚙️ Схема Интеграции Решения в Прод</a></strong></li>
+<li><strong><a href="https://raw.githubusercontent.com/terrainternship/KIA-GPT/main/Dmitrii_Panfilov/Kia_БЗ_v21.md">💾 База Знаний (автоматического парсинга сайта) v.21</a></strong></li>
 <li><strong><a href="https://colab.research.google.com/drive/1E-zR2zCRih5XkmhqL592cmijf1jWv-6S?usp=sharing">🗣 Whisper Транскрибация [Google Colab Notebook]</a></strong></li>
 <li><strong><a href="https://drive.google.com/file/d/1FIt8qR5-ZGaVwmUwRKSqgbfhz6h-aIDf/view?usp=sharing">🌐Ссылка на архив с обработанными видео-файлами [Google Drive]</a></strong></li>
 </p>
