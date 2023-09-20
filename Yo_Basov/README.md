@@ -7,9 +7,10 @@ Hosting: https://console.cloud.yandex.com
 
 ![Screenshot_1](https://github.com/terrainternship/KIA-GPT/assets/29410375/5e71b38c-86d6-448f-a5db-f7635930313e)
 
+`CRAZY API SCHEME`
+
 `**********************************************************************************************************************`
 
-CRAZY API SCHEME
 `   <----------------------------------------------------------------|`
 
 `TG  BOT          API                                                API                  API                TG BOT`
