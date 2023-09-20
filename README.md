@@ -1,3 +1,3 @@
 # KIA-GPT
 
- Коллаб с алгоритмом берем тут andrey_sorokin/KIA.ipybn
+[База-знаний-о-сплиттерах](https://github.com/terrainternship/KIA-GPT/wiki/База-знаний-о-сплиттерах5)https://github.com/terrainternship/KIA-GPT/wiki/База-знаний-о-сплиттерах
