@@ -40,3 +40,77 @@ Hosting: https://console.cloud.yandex.com
 `                   |------------------> YOLO    --------------------------|             LISTENER              SEARCH`
 
 `**********************************************************************************************************************`
+
+`swagger.io`
+
+`api builder`
+
+`Everything about api builder`
+
+``
+
+`POST`
+
+`/builder/{builderId}/process`
+
+`process admin tg bot command`
+
+`Parameters`
+
+`Try it out`
+
+`Name	Description`
+
+`builderId *`
+
+`integer($int64)`
+
+`ID of builder to update`
+
+`builderId`
+
+`additionalMetadata`
+
+`string`
+
+`(formData)`
+
+`Additional data to pass to server`
+
+`additionalMetadata`
+
+`file`
+
+`file`
+
+`(formData)`
+
+`file to upload`
+
+`Файл не выбран`
+
+`Responses`
+
+`Response content type`
+
+`application/json`
+
+`Code	Description`
+
+`200	`
+
+`successful operation`
+
+`Example Value`
+
+`Model`
+
+`{`
+
+`  "code": 0,`
+
+`  "type": "string",`
+
+`  "message": "string"`
+
+`}`
