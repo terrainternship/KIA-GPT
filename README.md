@@ -2,6 +2,8 @@
 
 База знаний: https://github.com/terrainternship/KIA-GPT/tree/main/knowledge
 
+Актуальная версия кода группы алгоритм для тестирования чанков для ответов: https://github.com/terrainternship/KIA-GPT/blob/NewDataBaseTishkinAndrew/andrey_sorokin/KIA.ipynb
+
 ## Сплитеры группы парсер
 
 `Сейчас используется стандартный Markdown Splitter. В частности h1, h2, h3 и ссылки с всплывающими подсказками в [](). И иногда используются сплиттеры УИИ _# , ##_.`
