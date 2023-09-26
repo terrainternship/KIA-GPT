@@ -4,6 +4,7 @@
 
 ### 📋 Таблица содержания
 - [🎯 Особенности](#features)
+- [🗺 Схема взаимодействия](#schema)
 - [🛠 Требования](#requirements)
 - [📦 Установка](#installation)
 - [🏃‍♂️ Запуск](#run)
@@ -18,6 +19,20 @@
 - Поддержка GPU для ускорения вычислений
 
 <a name="requirements"></a>
+
+### 🗺 Схема взаимодействия
+
+```mermaid
+sequenceDiagram
+Client ->> FastAPI: GET /info
+FastAPI -->> Client: Return project information
+Client ->> FastAPI: GET /kblist
+FastAPI -->> Client: Return KB List
+Client ->> FastAPI: POST /predict
+FastAPI -->> Client: Return prediction
+```
+<a name="schema"></a>
+
 ### 🛠 Требования
 
 - Docker
@@ -65,17 +80,5 @@ docker-compose up
 ### 🔒 Лицензия
 
 MIT License
-
-### 🗺 Схема взаимодействия
-
-```mermaid
-sequenceDiagram
-Client ->> FastAPI: GET /info
-FastAPI -->> Client: Return project information
-Client ->> FastAPI: GET /kblist
-FastAPI -->> Client: Return KB List
-Client ->> FastAPI: POST /predict
-FastAPI -->> Client: Return prediction
-```
 
 ---
