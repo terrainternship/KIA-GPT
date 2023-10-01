@@ -2,6 +2,8 @@
 
 База знаний: https://github.com/terrainternship/KIA-GPT/tree/main/knowledge
 
+Редактор онлайн: https://6d34f4ce7edb.vps.myjino.ru/
+
 Актуальная версия кода группы алгоритм для тестирования чанков для ответов: https://github.com/terrainternship/KIA-GPT/blob/main/andrey_sorokin/KIAv2.ipynb
 
 ## Сплитеры группы парсер
