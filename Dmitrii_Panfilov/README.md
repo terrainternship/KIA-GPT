@@ -1,20 +1,27 @@
 ## 💠 Проект Киа "Создание нейро-консультанта для ответов на вопросы клиентов"
+![image](https://github.com/terrainternship/KIA-GPT/assets/99917230/2a432b89-43ab-4a3d-8c17-b9563cf96457)
+
 
 <details>
     <summary><h2>💾 Ссылки на материалы</h2></summary><p>
-<li><strong><a href="https://colab.research.google.com/drive/1E-zR2zCRih5XkmhqL592cmijf1jWv-6S?usp=sharing">Whisper Транскрибация [Google Colab Notebook]</a></strong></li>
+<li><strong><a href="https://raw.githubusercontent.com/terrainternship/KIA-GPT/main/Dmitrii_Panfilov/Kia_Solution_Model_v40.pdf">⚙️ Схема Интеграции Решения в Прод</a></strong></li>
+<li><strong><a href="https://raw.githubusercontent.com/terrainternship/KIA-GPT/main/Dmitrii_Panfilov/Kia_БЗ_v21.md">💾 База Знаний (автоматического парсинга сайта) v.21</a></strong></li>
+<li><strong><a href="https://colab.research.google.com/drive/1E-zR2zCRih5XkmhqL592cmijf1jWv-6S?usp=sharing">🗣 Whisper Транскрибация [Google Colab Notebook]</a></strong></li>
 <li><strong><a href="https://drive.google.com/file/d/1FIt8qR5-ZGaVwmUwRKSqgbfhz6h-aIDf/view?usp=sharing">🌐Ссылка на архив с обработанными видео-файлами [Google Drive]</a></strong></li>
 </p>
 </details>
     
-<details><summary><h3>Пример Whisper Транскрибация</h3></summary><p>
+<details><summary><h3>🗣 Пример Whisper Транскрибация</h3></summary><p>
 <li><strong><a href="https://colab.research.google.com/drive/1E-zR2zCRih5XkmhqL592cmijf1jWv-6S?usp=sharing">Google Colab Notebook</a></strong></li><br>
 <img src="https://github.com/terrainternship/KIA-GPT/assets/99917230/b89d1c06-6006-4fc8-a6bf-a51350207f66" alt="image" />
 </p></details>
 
 ---
 
-<details><summary><h2>📆 Промежуточные результаты на [12.08.2023]</h2></summary>
+<details><summary><h2>📆 Промежуточные результаты на [19.08.2023]</h2></summary>
+    <h3>🔘 [19.09.2023]: Разработка схемы интеграции решения в прод</h3>
+<li>1. Анализ подходов для интгерации подобных решений на рынке с учетом ТЗ заказчика</li>
+<li>2. Разработка схемы интеграции решения в прод, выделение основных этапов внедрения</li>
     <h3>🔘 [12.09.2023]: Приведение кода по Транскрибации к формату Google Colab</h3>
 <li>1. Подготовка Google Colab Notebook для транскрибации [Whisper]</li>
 <li>2. Поиск в ручном режиме ссылок на Видео (запрещенных для парсинга), транскрибация неохваченных видео в автоматическом режиме</li>

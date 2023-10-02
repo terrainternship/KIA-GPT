@@ -1,0 +1,17 @@
+# docker-compose.yml
+version: '3'
+services:
+  fastapi_app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    runtime: nvidia  # Для использования GPU
+    environment:
+      #- TF_ENABLE_ONEDNN_OPTS=0
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - NVIDIA_VISIBLE_DEVICES=all
+    ulimits:
+      memlock: -1
+      stack: 67108864  # размер стека в байтах (64 MB)
