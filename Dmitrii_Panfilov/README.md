@@ -10,7 +10,9 @@
 <li><strong><a href="https://drive.google.com/file/d/1FIt8qR5-ZGaVwmUwRKSqgbfhz6h-aIDf/view?usp=sharing">🌐Ссылка на архив с обработанными видео-файлами [Google Drive]</a></strong></li>
 </p>
 </details>
-    
+
+---
+
 <details><summary><h3>🗣 Пример Whisper Транскрибация</h3></summary><p>
 <li><strong><a href="https://colab.research.google.com/drive/1E-zR2zCRih5XkmhqL592cmijf1jWv-6S?usp=sharing">Google Colab Notebook</a></strong></li><br>
 <img src="https://github.com/terrainternship/KIA-GPT/assets/99917230/b89d1c06-6006-4fc8-a6bf-a51350207f66" alt="image" />
