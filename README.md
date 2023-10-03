@@ -1,5 +1,7 @@
 # KIA-GPT
 
+Тестирование: https://docs.google.com/spreadsheets/d/1dlzmaiKBX8ZxIc-OM9XUrv2vkQVgY1Gs5SYPm9ZZQ8s/edit#gid=1214543959
+
 База знаний: https://github.com/terrainternship/KIA-GPT/tree/main/knowledge
 
 Редактор онлайн: https://6d34f4ce7edb.vps.myjino.ru/
