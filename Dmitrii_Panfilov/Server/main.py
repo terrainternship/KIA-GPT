@@ -69,6 +69,16 @@ async def predict():
   pass
 
 
+@app.post('/audio')
+async def whisperfile():
+  pass
+
+
+@app.post('/summ')
+async def sbersumm():
+  pass
+    
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
