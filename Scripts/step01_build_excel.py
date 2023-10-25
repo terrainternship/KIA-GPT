@@ -17,15 +17,24 @@ class step01_build_excel():
         knowledge_dir = config["DEFAULT"]["knowledge_dir"]
         if knowledge_dir is None: knowledge_dir = "./knowledge"
         pathlib.Path(knowledge_dir).mkdir(parents=True, exist_ok=True)
-        filepath_01 = os.path.join(knowledge_dir, "__01_calc_credit_database.txt")
-        with open(filepath_01, "w") as f01:
-            f01.write("")
-        filepath_02 = os.path.join(knowledge_dir, "__02_calc_tech_database.txt")
-        with open(filepath_02, "w") as f02:
-            f02.write("")
-        filepath_03 = os.path.join(knowledge_dir, "__03_calc_tradein.txt")
-        with open(filepath_03, "w") as f03:
-            f03.write("")
+        filepath_00 = os.path.join(knowledge_dir, "TRASH.md")
+        with open(filepath_00, "w") as f00:
+            f00.write("# trash")
+        filepath_01 = os.path.join(knowledge_dir, "TRASH.md")
+        with open(filepath_01, "a") as f01:
+            f01.write("## 01")
+            f01.write("? ? ? ? ? ? ? ? ? ?")
+            f01.write("############")
+        filepath_02 = os.path.join(knowledge_dir, "TRASH.md")
+        with open(filepath_02, "a") as f02:
+            f02.write("## 02")
+            f02.write("? ? ? ? ? ? ? ? ? ?")
+            f02.write("############")
+        filepath_03 = os.path.join(knowledge_dir, "TRASH.md")
+        with open(filepath_03, "a") as f03:
+            f03.write("## 03")
+            f03.write("? ? ? ? ? ? ? ? ? ?")
+            f03.write("############")
         print(msg, " ... OK")
 
 if __name__ == '__main__':
