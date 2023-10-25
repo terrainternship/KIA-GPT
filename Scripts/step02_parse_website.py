@@ -5,6 +5,20 @@ class step02_parse_website():
         pass
 
     def run(self, msg):
+        import configparser
+        import pathlib
+        import shutil
+        import os
+        config = configparser.ConfigParser()
+        config.read('config.txt')
+        knowledge_dir = config["DEFAULT"]["knowledge_dir"]
+        if knowledge_dir is None: knowledge_dir = "./knowledge"
+        pathlib.Path(knowledge_dir).mkdir(parents=True, exist_ok=True)
+        prev_knowledge_dir = config["DEFAULT"]["prev_knowledge_dir"]
+        if prev_knowledge_dir is None: prev_knowledge_dir = "../knowledge"
+        pathlib.Path(prev_knowledge_dir).mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(os.path.join(prev_knowledge_dir, "parser_database.txt"), os.path.join(knowledge_dir, "parser_database.txt"))
+        """
         import datetime
         import numpy as np
         import openpyxl
@@ -496,6 +510,7 @@ class step02_parse_website():
 
         for oil in oil_res:
             print(oil, oil_res[oil][0])
+        """
 
         """!echo "# Технологии" > database.txt"""
         """!cat result/about/*.txt >> database.txt"""

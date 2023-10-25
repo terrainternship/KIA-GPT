@@ -12,7 +12,6 @@ class step01_build_excel():
         import configparser
         import pathlib
         import os
-        import openpyxl
         config = configparser.ConfigParser()
         config.read('config.txt')
         knowledge_dir = config["DEFAULT"]["knowledge_dir"]

@@ -1,5 +1,7 @@
 [DEFAULT]
 knowledge_dir=./knowledge
+prev_knowledge_dir=../knowledge
 
 [PROM]
 knowledge_dir=/opt/knowledge
+prev_knowledge_dir=/knowledge
