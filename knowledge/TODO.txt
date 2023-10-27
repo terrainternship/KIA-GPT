@@ -1,0 +1,9 @@
+parts: Good for answering questions about Kia parts.
+oils: Good for answering questions about Kia engine oils.
+tech: Good for answering questions about technical problems with Kia vehicles.
+accessories: Good for answering questions about accessories used in Kia vehicles.
+warranty: Good for answering questions about Kia vehicle warranties.
+service: Good for answering Kia vehicle service questions.
+sales: Good for answering Kia car sales questions.
+apps: Good for answering questions about using Kia software.
+promotion: Good for answering questions about Kia promotions.
