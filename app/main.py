@@ -25,6 +25,7 @@ def insert_newlines(textstr: str, max_len: int = 170) -> str:
 
 def run_dialog():
     kiav5router.setOpenAI()
+    kiav5router.load_knowledge()
     kiav5router.load_promt()
     while True:
         user_question = input('\nКлиент: ')

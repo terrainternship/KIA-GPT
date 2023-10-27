@@ -5,7 +5,14 @@ import requests
 #database
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
+from langchain.chains.router import MultiPromptChain
+from langchain.llms import OpenAI
+from langchain.chains import ConversationChain
+from langchain.chains.llm import LLMChain
 from langchain.prompts import PromptTemplate
+from langchain.chains.router.llm_router import LLMRouterChain, RouterOutputParser
+from langchain.chains.router.multi_prompt_prompt import MULTI_PROMPT_ROUTER_TEMPLATE
+
 import pathlib
 import subprocess
 import tempfile
@@ -17,14 +24,12 @@ import openai
 #import tiktoken
 from langchain.text_splitter import MarkdownHeaderTextSplitter
 import re
-from langchain.chains.router import MultiPromptChain
-from langchain.llms import OpenAI
-from langchain.chains import ConversationChain
-from langchain.chains.llm import LLMChain
-from langchain.prompts import PromptTemplate
+
 
 PROMT=''
 url_promt='https://docs.google.com/document/d/1i8HA7cX4Ut-tb9rf8wOgERU7lLe66xJYscizGtSSJl0'
+
+chain = []
 
 MODEL_GPT_3_5_TURBO_16K = ['gpt-3.5-turbo-16k', 0.003, 0.004]
 MODEL_GPT_3_5_TURBO = ['gpt-3.5-turbo', 0.0015, 0.002]  # 4,097 tokens
@@ -110,6 +115,65 @@ When you don't know the answer to a question, you admit that you don't know.
 Here is a question:
 {input}"""
 
+prompt_infos = [
+    {
+        "name": "models",
+        "description": "Good for answering questions about models kia auto",
+        "prompt_template": models_template,
+    },
+    {
+        "name": "technology",
+        "description": "Good for answering questions about Kia technology.",
+        "prompt_template": technology_template,
+    },
+    {
+        "name": "parts",
+        "description": "Good for answering questions about Kia parts.",
+        "prompt_template": parts_template,
+    },
+    {
+        "name": "oils",
+        "description": "Good for answering questions about Kia engine oils.",
+        "prompt_template": oils_template,
+    },
+    {
+        "name": "tech",
+        "description": "Good for answering questions about technical problems with Kia vehicles.",
+        "prompt_template": tech_template,
+    },
+    {
+        "name": "accessories",
+        "description": "Good for answering questions about accessories used in Kia vehicles.",
+        "prompt_template": accessories_template,
+    },
+    {
+        "name": "warranty",
+        "description": "Good for answering questions about Kia vehicle warranties.",
+        "prompt_template": warranty_template,
+    },
+    {
+        "name": "service",
+        "description": "Good for answering Kia vehicle service questions.",
+        "prompt_template": service_template,
+    },
+    {
+        "name": "sales",
+        "description": "Good for answering Kia car sales questions.",
+        "prompt_template": sales_template,
+    },
+    {
+        "name": "apps",
+        "description": "Good for answering questions about using Kia software.",
+        "prompt_template": apps_template,
+    },
+    {
+        "name": "promotion",
+        "description": "Good for answering questions about Kia promotions.",
+        "prompt_template": promotion_template,
+    },
+]
+
+
 
 def setOpenAI():
     # Это надо первести на .env
@@ -154,32 +218,59 @@ def load_document_text(url: str) -> str:
 #     return vectordateBase
 
 def init_routing():
+        llm = OpenAI()
+
+        destination_chains = {}
+        for p_info in prompt_infos:
+            name = p_info["name"]
+            prompt_template = p_info["prompt_template"]
+            prompt = PromptTemplate(template=prompt_template, input_variables=["input"])
+            chain = LLMChain(llm=llm, prompt=prompt)
+            destination_chains[name] = chain
+        default_chain = ConversationChain(llm=llm, output_key="text")
+        destinations = [f"{p['name']}: {p['description']}" for p in prompt_infos]
+        destinations_str = "\n".join(destinations)
+        print(destinations_str)
+        router_template = MULTI_PROMPT_ROUTER_TEMPLATE.format(destinations=destinations_str)
+        router_prompt = PromptTemplate(
+            template=router_template,
+            input_variables=["input"],
+            output_parser=RouterOutputParser(),
+        )
+        router_chain = LLMRouterChain.from_llm(llm, router_prompt)
+        chain = MultiPromptChain(
+            router_chain=router_chain,
+            destination_chains=destination_chains,
+            default_chain=default_chain,
+            verbose=True,
+        )
+
     
 
 
 
 def load_knowledge():
-    models_knowledge_base = load_file_knowledge('models.md')
-    technology_knowledge_base = load_file_knowledge('technology.md')
-    parts_knowledge_base = load_file_knowledge('parts.md')
-    oils_knowledge_base = load_file_knowledge('oils.md')
-    tech_knowledge_base = load_file_knowledge('tech.md')
-    accessories_knowledge_base = load_file_knowledge('accessories.md')
-    warranty_knowledge_base = load_file_knowledge('warranty.md')
-    service_knowledge_base = load_file_knowledge('service.md')
-    sales_knowledge_base = load_file_knowledge('sales.md')
-    apps_knowledge_base = load_file_knowledge('apps.md')
-    promotions_knowledge_base = load_file_knowledge('promotions.md')
+    models_knowledge_base = FAISS.load_local('./knowledge/faiss_router/faiss_models', OpenAIEmbeddings())
+    technology_knowledge_base = FAISS.load_local('./knowledge/faiss_router/faiss_technology', OpenAIEmbeddings())
+    parts_knowledge_base = FAISS.load_local('./knowledge/faiss_router/faiss_parts', OpenAIEmbeddings())
+    oils_knowledge_base = FAISS.load_local('./knowledge/faiss_router/faiss_oils', OpenAIEmbeddings())
+    tech_knowledge_base = FAISS.load_local('./knowledge/faiss_router/faiss_tech', OpenAIEmbeddings())
+    accessories_knowledge_base = FAISS.load_local('./knowledge/faiss_router/faiss_accessories', OpenAIEmbeddings())
+    warranty_knowledge_base = FAISS.load_local('./knowledge/faiss_router/faiss_warranty', OpenAIEmbeddings())
+    service_knowledge_base = FAISS.load_local('./knowledge/faiss_router/faiss_service', OpenAIEmbeddings())
+    sales_knowledge_base = FAISS.load_local('./knowledge/faiss_router/faiss_sales', OpenAIEmbeddings())
+    apps_knowledge_base = FAISS.load_local('./knowledge/faiss_router/faiss_apps', OpenAIEmbeddings())
+    promotions_knowledge_base = FAISS.load_local('./knowledge/faiss_router/faiss_promotions', OpenAIEmbeddings())
     #none_knowledge_base = load_file_knowledge('none.md')
 
 def load_promt():
-     PROMT = load_document_text (url_promt)
+     PROMT = load_document_text(url_promt)
+     print(url_promt)
 
 
 def answer_index(topic, temp=0.1, top_similar_documents=3):
-
         if PROMT == '': 
-            print('Promt is clear') 
+            print(PROMT) 
             return 'Promt is clear'
 
         router_result = router_chain.__call__({"input": topic})
