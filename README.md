@@ -1,5 +1,18 @@
 # KIA-GPT
 
+## Install
+
+воодим эти команды в консоле для установке в среде
+
+`pip3  install  openai`
+
+`pip3  install  langchain`
+
+`pip3  install  faiss-cpu`
+
+
+
+
 ## Тестирование
 **Тестирование Legacy:** 
 https://docs.google.com/spreadsheets/d/1dlzmaiKBX8ZxIc-OM9XUrv2vkQVgY1Gs5SYPm9ZZQ8s/edit#gid=1214543959
