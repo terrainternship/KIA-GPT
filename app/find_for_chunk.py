@@ -74,4 +74,4 @@ class OpenAIHandler:
                     print(f'=== score = {score}  Metadata документа ------------ {doc.metadata}')
                     print(f' \n{content}\n')
                     responses.append(response)
-            return  
+            return  ' '

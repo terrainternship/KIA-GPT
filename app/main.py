@@ -37,7 +37,7 @@ def run_dialog():
         if ((user_question.lower() == 'stop') or (user_question.lower() == 'стоп')):
             break
         answer = gpt.answer_index(user_question)
-       # print('\nМенеджер: ', insert_newlines(answer)+'\n\n')
+        print('\nМенеджер: ', insert_newlines(answer)+'\n\n')
 
     return
 
