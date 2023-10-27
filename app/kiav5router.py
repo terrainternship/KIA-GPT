@@ -5,8 +5,6 @@ import requests
 #database
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-#from langchain.document_loaders import TextLoader
 from langchain.prompts import PromptTemplate
 import pathlib
 import subprocess
@@ -17,6 +15,8 @@ import os
 import platform
 import openai
 #import tiktoken
+from langchain.text_splitter import MarkdownHeaderTextSplitter
+import re
 
 PROMT=''
 
@@ -47,6 +47,27 @@ def load_document_text(url: str) -> str:
     response.raise_for_status()
     text = response.text
     return text
+
+
+def load_file_knowledge(file_path: str) -> str:
+    # Чтение текстового файла
+    with open(file_path, 'r', encoding='utf-8') as file:
+        text = file.read()
+
+    headers_to_split_on = [
+        ("#", "router"),
+        ("##", "Header2"),
+        ("###", "Header3"),
+        ("####", "Header4"),
+    ]
+
+    markdown_splitter = MarkdownHeaderTextSplitter(headers_to_split_on=headers_to_split_on)
+    md_header_splits = markdown_splitter.split_text(text)
+
+    # Предполагается, что FAISS и OpenAIEmbeddings были импортированы или определены где-то выше
+    vectordateBase = FAISS.from_documents(md_header_splits, OpenAIEmbeddings())
+
+    return vectordateBase
 
 
 
@@ -99,7 +120,7 @@ def answer_index(topic, temp=0.1, top_similar_documents=3):
 
 
         messages = [
-            {"role": "system", "content": prompt},
+            {"role": "system", "content": PROMT},
             {"role": "user",
              "content": f"Документ с информацией для ответа клиенту: {responses}\n\nВопрос клиента: \n{topic}"}
         ]
@@ -112,4 +133,4 @@ def answer_index(topic, temp=0.1, top_similar_documents=3):
 
         answer = completion.choices[0].message.content
 
-        return  insert_newlines(answer)
+        return  answer
