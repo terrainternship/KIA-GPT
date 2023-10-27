@@ -24,14 +24,16 @@ def insert_newlines(textstr: str, max_len: int = 170) -> str:
 
 
 def run_dialog():
-
+    kiav5router.load_promt()
     while True:
         user_question = input('\nКлиент: ')
         if ((user_question.lower() == 'stop') or (user_question.lower() == 'стоп')):
             break
-        answer = answer_index(user_question)
+        answer = kiav5router.answer_index(user_question)
         print('\nМенеджер: ', insert_newlines(answer)+'\n\n')
 
     return
 
+clear_screen()
+#START APP
 run_dialog()
