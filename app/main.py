@@ -1,6 +1,10 @@
-import kiav5router
+from kiav5router import OpenAIHandler
 import os
 import platform
+
+gpt = OpenAIHandler()
+
+
 
 def clear_screen():
     system_platform = platform.system()  # определить операционную систему
@@ -24,14 +28,14 @@ def insert_newlines(textstr: str, max_len: int = 170) -> str:
 
 
 def run_dialog():
-    kiav5router.setOpenAI()
-    kiav5router.load_knowledge()
-    kiav5router.load_promt()
+    gpt.setOpenAI()
+    gpt.load_knowledge()
+    gpt.load_promt()
     while True:
         user_question = input('\nКлиент: ')
         if ((user_question.lower() == 'stop') or (user_question.lower() == 'стоп')):
             break
-        answer = kiav5router.answer_index(user_question)
+        answer = gpt.answer_index(user_question)
         print('\nМенеджер: ', insert_newlines(answer)+'\n\n')
 
     return
