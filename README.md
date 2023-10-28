@@ -2,16 +2,9 @@
 
 ## Install
 
-воодим эти команды в консоле для установке в среде
+воодим эту команду в консоле для установке в среде
 
-`pip3  install  openai`
-
-`pip3  install  langchain`
-
-`pip3  install  faiss-cpu`
-
-
-
+`pip install -r requirements.txt`
 
 ## Тестирование
 **Тестирование Legacy:** 
@@ -32,3 +25,13 @@ https://colab.research.google.com/drive/1wLZ-SfbOnHFrG7YSkX50LrMo0yBrCI6Y?usp=sh
 
 Редактор онлайн: https://6d34f4ce7edb.vps.myjino.ru/
 
+
+
+**База знаний для роутинга V2**	
+https://github.com/TasksAndreySorokin/KIA-GPT1/tree/routing_prompt/knowledge/knowledge_for_router
+
+**Коллаб с пеерключалкой БЗ**	
+https://colab.research.google.com/drive/1mSWJVcoO7RpB2XO2yVfclZhQfTizcFvv?usp=sharing
+
+**Коллаб с локальной векторной базой FAISS_routing**	
+https://colab.research.google.com/drive/1mpDmLooBc7zjox3ANp_MMGJv-QoNQ6uz?usp=sharing
