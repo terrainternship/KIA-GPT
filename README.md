@@ -2,16 +2,9 @@
 
 ## Install
 
-воодим эти команды в консоле для установке в среде
+воодим эту команду в консоле для установке в среде
 
-`pip3  install  openai`
-
-`pip3  install  langchain`
-
-`pip3  install  faiss-cpu`
-
-
-
+`pip install -r requirements.txt`
 
 ## Тестирование
 **Тестирование Legacy:** 
