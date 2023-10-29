@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-class step03_append_website():
+class step03_copy_website():
     def __init__(self):
         pass
 
@@ -31,4 +31,4 @@ class step03_append_website():
         print(msg, " ... OK")
 
 if __name__ == '__main__':
-    step03_append_website().run("")
+    step03_copy_website().run("")

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-class step01_build_excel():
+class step01_copy_excel():
     def __init__(self):
         pass
 
@@ -38,4 +38,4 @@ class step01_build_excel():
         print(msg, " ... OK")
 
 if __name__ == '__main__':
-    step01_build_excel().run("")
+    step01_copy_excel().run("")
