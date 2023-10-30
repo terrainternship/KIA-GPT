@@ -14,7 +14,7 @@ class step00_create_excel():
         import openpyxl
         config = configparser.ConfigParser()
         config.read('config.txt')
-        knowledge_dir = config["DEFAULT"]["knowledge_dir"]
+        knowledge_dir = config["COLAB"]["knowledge_dir"]
         if knowledge_dir is None: knowledge_dir = "./knowledge"
         pathlib.Path(knowledge_dir).mkdir(parents=True, exist_ok=True)
         filepath_01 = os.path.join(knowledge_dir, "01_calc_credit.xlsx")
