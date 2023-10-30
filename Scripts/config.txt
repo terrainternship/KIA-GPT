@@ -1,0 +1,11 @@
+[COLAB]
+knowledge_dir=/content/drive/MyDrive/KIA_AVATAR/Scripts/knowledge
+prev_knowledge_dir=/content/drive/MyDrive/KIA_AVATAR/knowledge
+
+[PROM]
+knowledge_dir=/opt/knowledge
+prev_knowledge_dir=/knowledge
+
+[STEP03_COPY_WEBSITE]
+api_key=?
+neuro_copyrighter_limit=2
