@@ -11,10 +11,10 @@ class step02_parse_website():
         import os
         config = configparser.ConfigParser()
         config.read('config.txt')
-        knowledge_dir = config["DEFAULT"]["knowledge_dir"]
+        knowledge_dir = config["COLAB"]["knowledge_dir"]
         if knowledge_dir is None: knowledge_dir = "./knowledge"
         pathlib.Path(knowledge_dir).mkdir(parents=True, exist_ok=True)
-        prev_knowledge_dir = config["DEFAULT"]["prev_knowledge_dir"]
+        prev_knowledge_dir = config["COLAB"]["prev_knowledge_dir"]
         if prev_knowledge_dir is None: prev_knowledge_dir = "../knowledge"
         pathlib.Path(prev_knowledge_dir).mkdir(parents=True, exist_ok=True)
         shutil.copyfile(os.path.join(prev_knowledge_dir, "parser_database.txt"), os.path.join(knowledge_dir, "parser_database.txt"))
@@ -522,6 +522,7 @@ class step02_parse_website():
         """!zip database.zip database.txt"""
 
         print(msg, " ... OK")
+
 
 if __name__ == '__main__':
     step02_parse_website().run("")
