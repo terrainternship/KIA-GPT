@@ -10,23 +10,19 @@ class step03_copy_website():
         import os
         config = configparser.ConfigParser()
         config.read('config.txt')
-        knowledge_dir = config["DEFAULT"]["knowledge_dir"]
+        knowledge_dir = config["COLAB"]["knowledge_dir"]
         if knowledge_dir is None: knowledge_dir = "./knowledge"
         pathlib.Path(knowledge_dir).mkdir(parents=True, exist_ok=True)
+        prev_knowledge_dir = config["COLAB"]["prev_knowledge_dir"]
+        if prev_knowledge_dir is None: prev_knowledge_dir = "../knowledge"
+        pathlib.Path(prev_knowledge_dir).mkdir(parents=True, exist_ok=True)
 
-        def append_with_conflicts_using_neuro_copyrighter(dir):
-            return False
-
-        def append_as_is(knowledge_dir):
-            filepath_00 = os.path.join(knowledge_dir, "TRASH.md")
-            with open(filepath_00, "a") as f00:
-                with open("example.txt", "r") as fe:
-                    with open(os.path.join(knowledge_dir, "__parser_database.txt"), "r") as fr:
-                        pass
-            return True
-
-        if not append_with_conflicts_using_neuro_copyrighter(dir):
-            append_as_is(dir)
+        filepath_01 = os.path.join(knowledge_dir, "COPY.md")
+        with open(filepath_01, "a") as f01:
+            f01.write("# section-1\n")
+            with open(os.path.join(prev_knowledge_dir, "parser_database.txt"), "r") as f:
+                for line in f.readlines():
+                    f01.write(line.replace("^#### ", "##### ").replace("^### ", "#### ").replace("^## ", "### ").replace("^# ", "## "))
 
         print(msg, " ... OK")
 
