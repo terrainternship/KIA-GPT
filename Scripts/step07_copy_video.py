@@ -6,7 +6,7 @@ class step07_copy_video():
 
     def run(self, msg):
         import tiktoken
-
+        import re
         import configparser
         import pathlib
         import os
@@ -22,7 +22,7 @@ class step07_copy_video():
         def num_tokens_from_messages(model, messages):
             """Returns the number of tokens used by a list of messages."""
             try:
-                encoding = tiktoken.encoding_for_model(self.model)
+                encoding = tiktoken.encoding_for_model(model)
             except KeyError:
                 encoding = tiktoken.get_encoding("cl100k_base")
             if model in ["gpt-3.5-turbo-0613", "gpt-3.5-turbo-16k", "gpt-4-0613"]:  # note: future models may deviate from this
@@ -38,33 +38,79 @@ class step07_copy_video():
             else:
                 raise NotImplementedError(f"""num_tokens_from_messages() is not presently implemented for model {model}.  See https://github.com/openai/openai-python/blob/main/chatml.md for information on how messages are converted to tokens.""")
 
-        info_cnt = 0
-        while True:
-            last_md_level_01 = "#"
-            last_md_level_02 = "##"
-            last_md_level_03 = "###"
-            with open(os.path.join(prev_knowledge_dir, "pdf_database.txt"), "r") as f:
-                info_cnt = info_cnt + 1
-                filepath_01 = os.path.join(knowledge_dir, f"INFO-{info_cnt}.md")
-                with open(filepath_01, "w") as f01:
-                    # f01.write("# info\n")
-                    for line in f.readlines():
-                        f01.write(line.replace("^#### ", "##### ").replace("^### ", "#### ").replace("^## ", "### ").replace("^# ", "## "))
-            break
+        dict_databases = {"pdf_database.txt": "info", "video_database.txt": "howto"}
+        for key in sorted(dict_databases.keys()):
+            total_cnt = 0
+            last_01_md_level_01 = None
+            last_01_md_level_02 = None
+            last_01_md_level_03 = None
+            with open(os.path.join(prev_knowledge_dir, key), "r") as f:
+                f01_lines = []
+                for line in f.readlines():
+                    if len(line) > 253:
+                        chunks, chunk_size = len(line)//253, 253
+                        lines = [ line[i:i+chunk_size] for i in range(0, chunks, chunk_size)]
+                        line = " ########## ".join(lines)
+                    if re.match(("^#[^#]"), line) is not None:
+                        last_01_md_level_01 = line
+                        last_01_md_level_02 = None
+                        last_01_md_level_03 = None
+                    if re.match(("^##[^#]"), line) is not None:
+                        last_01_md_level_02 = line
+                        last_01_md_level_03 = None
+                    if re.match(("^###[^#]"), line) is not None:
+                        last_01_md_level_03 = line
 
-        howto_cnt = 0
-        while True:
-            last_md_level_01 = "#"
-            last_md_level_02 = "##"
-            last_md_level_03 = "###"
-            with open(os.path.join(prev_knowledge_dir, "video_database.txt"), "r") as f:
-                howto_cnt = howto_cnt + 1
-                filepath_02 = os.path.join(knowledge_dir, f"HOWTO-{howto_cnt}.md")
-                with open(filepath_02, "w") as f02:
-                    # f02.write("# howto\n")
-                    for line in f.readlines():
-                        f02.write(line.replace("^#### ", "##### ").replace("^### ", "#### ").replace("^## ", "### ").replace("^# ", "## "))
-            break
+                    cur_tokens = num_tokens_from_messages("gpt-3.5-turbo-16k", [{"": '\n'.join(f01_lines)}])
+                    f01_new_lines = [line]
+                    for s in f01_lines:
+                        f01_new_lines.append(s)
+                    next_tokens = num_tokens_from_messages("gpt-3.5-turbo-16k", [{"": '\n'.join(f01_new_lines)}])
+                    if next_tokens > 1024:
+                        print(f"{key} - {total_cnt}")
+                        print(f"{last_01_md_level_01}")
+                        print(f"{last_01_md_level_02}")
+                        print(f"{last_01_md_level_03}")
+                        print("BEGIN")
+                        filepath_01 = os.path.join(knowledge_dir, f"{dict_databases[key]}-{total_cnt}.md")
+                        with open(filepath_01, "w") as f01:
+                            for f01_line in f01_lines:
+                                f01_line = re.sub("^####", "##### ", f01_line)
+                                f01_line = re.sub("^###", "#### ", f01_line)
+                                f01_line = re.sub("^##", "### ", f01_line)
+                                f01_line = re.sub("^#", "## ", f01_line)
+                                f01.write(f01_line)
+                        f01_lines = []
+                        if last_01_md_level_01 is not None:
+                            f01_lines.append(last_01_md_level_01.replace("^#", f"#{total_cnt}  "))
+                        if last_01_md_level_02 is not None:
+                            f01_lines.append(last_01_md_level_02.replace("^##", f"##{total_cnt}  "))
+                        if last_01_md_level_03 is not None:
+                            f01_lines.append(last_01_md_level_03.replace("^###", f"###{total_cnt}  "))
+                        if re.match(("^#"), line) is None:
+                            f01_lines.append(line)
+                        total_cnt = total_cnt + 1
+                        print("END")
+                    else:
+                        f01_lines.append(line)
+                filepath_01 = os.path.join(knowledge_dir, f"{dict_databases[key]}-{total_cnt}.md")
+                with open(filepath_01, "w") as f01:
+                    for f01_line in f01_lines:
+                        f01.write(f01_line.replace("^####", "##### ").replace("^###", "#### ").replace("^##", "### ").replace("^#", "## "))
+                with open(os.path.join(knowledge_dir, f"{dict_databases[key]}.md"), "w") as fw01:
+                    fw01.write(f"# {dict_databases[key]}\n")
+                    for cnt in range(0, total_cnt):
+                        filepath_01 = os.path.join(knowledge_dir, f"{dict_databases[key]}-{cnt}.md")
+                        with open(filepath_01, "r") as fr01:
+                            for line in fr01.readlines():
+                                fw01.write(line)
+                with open(os.path.join(knowledge_dir, f"COPY.md"), "a") as fw01:
+                    fw01.write(f"# {dict_databases[key]}\n")
+                    for cnt in range(0, total_cnt):
+                        filepath_01 = os.path.join(knowledge_dir, f"{dict_databases[key]}-{cnt}.md")
+                        with open(filepath_01, "r") as fr01:
+                            for line in fr01.readlines():
+                                fw01.write(line)
 
         print(msg, " ... OK")
 
