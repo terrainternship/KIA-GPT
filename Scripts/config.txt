@@ -1,11 +1,23 @@
 [COLAB]
 knowledge_dir=/content/drive/MyDrive/KIA_AVATAR/Scripts/knowledge
-prev_knowledge_dir=/content/drive/MyDrive/KIA_AVATAR/knowledge
+prev_knowledge_dir=/content/drive/MyDrive/KIA_AVATAR/Scripts/../knowledge
 
 [PROM]
 knowledge_dir=/opt/knowledge
 prev_knowledge_dir=/knowledge
 
-[STEP03_COPY_WEBSITE]
+[CHATGPT]
 api_key=?
-neuro_copyrighter_limit=2
+tokens_limit=0
+
+[GOOGLE]
+search_api_key=?
+search_limit=0
+
+[YANDEX]
+spellcheck_api_key=?
+spellcheck_limit=0
+
+[GITHUB]
+summary_api_key=?
+summary_limit=0
