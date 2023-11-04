@@ -6,6 +6,8 @@ on embeddings in word2vec format.
 Some results on usefulness:
 * usefulness for POS tagging: https://github.com/GateNLP/exp-lf-pos
 
+* readme https://www.sbert.net/docs/hugging_face.html#sharing-your-embeddings
+
 ## Usage
 
 Get usage information by running:
