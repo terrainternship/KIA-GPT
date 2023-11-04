@@ -5,11 +5,14 @@ class step07_copy_video():
         pass
 
     def run(self, msg):
+        import pyaspeller
         import tiktoken
         import re
         import configparser
         import pathlib
         import os
+        import time
+        import random
         config = configparser.ConfigParser()
         config.read('config.txt')
         knowledge_dir = config["COLAB"]["knowledge_dir"]
@@ -38,6 +41,9 @@ class step07_copy_video():
             else:
                 raise NotImplementedError(f"""num_tokens_from_messages() is not presently implemented for model {model}.  See https://github.com/openai/openai-python/blob/main/chatml.md for information on how messages are converted to tokens.""")
 
+        from pyaspeller import YandexSpeller
+        speller = YandexSpeller()
+
         dict_databases = {"pdf_database.txt": "info", "video_database.txt": "howto"}
         for key in sorted(dict_databases.keys()):
             total_cnt = 0
@@ -47,6 +53,8 @@ class step07_copy_video():
             with open(os.path.join(prev_knowledge_dir, key), "r") as f:
                 f01_lines = []
                 for line in f.readlines():
+                    line = speller.spelled(line)
+                    time.sleep(random.randrange(1))
                     if len(line) > 253:
                         chunks, chunk_size = len(line)//253, 253
                         lines = [ line[i:i+chunk_size] for i in range(0, chunks, chunk_size)]
