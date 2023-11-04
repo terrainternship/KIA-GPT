@@ -12,3 +12,4 @@ oauth2client==4.1.3
 openai==0.27.0
 tika==2.6.0
 pyaspeller==1.2.0
+faiss-cpu==1.7.4
