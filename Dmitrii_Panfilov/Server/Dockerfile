@@ -1,12 +1,9 @@
 # Dockerfile for chatGPT and/or other LLM
-# официальный базовый образ TensorFlow GPU Jupyter
-FROM tensorflow/tensorflow:latest-gpu-jupyter
+FROM nvidia/cuda:12.0.0-runtime-ubuntu22.04
 
 # Установка необходимых пакетов и обновление системы
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    build-essential \
-    libgl1-mesa-glx && \
+    apt-get install -y --no-install-recommends && \
     pip install --no-cache-dir -U pip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
