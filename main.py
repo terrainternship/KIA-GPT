@@ -1,9 +1,10 @@
 #from kiav5router import OpenAIHandler
-from find_for_chunk import OpenAIHandler
+#from find_for_chunk import OpenAIHandler
+from './source/gpt' import OpenAIHandler
 import os
 import platform
 
-gpt = OpenAIHandler()
+OpenGPT = OpenAIHandler()
 
 
 
@@ -29,9 +30,9 @@ def insert_newlines(textstr: str, max_len: int = 170) -> str:
 
 
 def run_dialog():
-    gpt.setOpenAI()
-    gpt.load_knowledge()
-    gpt.load_promt()
+    OpenGPT.setOpenAI()
+    OpenGPT.load_knowledge()
+    OpenGPT.load_promt()
     while True:
         user_question = input('\nКлиент: ')
         if ((user_question.lower() == 'stop') or (user_question.lower() == 'стоп')):

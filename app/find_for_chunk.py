@@ -25,8 +25,6 @@ class OpenAIHandler:
     SELECT_MODEL_GPT = MODEL_GPT_4
 
 
-
-
     def setOpenAI(self):
         # Это надо первести на .env
         openai_key = getpass.getpass("OpenAI API Key:") 
