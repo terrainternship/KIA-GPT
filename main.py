@@ -1,6 +1,5 @@
-#from kiav5router import OpenAIHandler
-#from find_for_chunk import OpenAIHandler
-from './source/gpt' import OpenAIHandler
+
+from source.gpt import OpenAIHandler
 import os
 import platform
 
