@@ -39,11 +39,26 @@ class OpenAIHandler:
             exit(1)
 
 
+    # Функция для запроса подтверждения от пользователя
+    def _confirm_replacement():
+        # Запрос ввода от пользователя
+        user_input = input("Заменить существующий файл Базы знаний? (да/1 для подтверждения): ").lower().strip()
+
+        # Проверка ответа пользователя
+        if user_input == 'да' or user_input == '1':
+            # Пользователь подтвердил замену файла
+            print("Файл заменен.")
+        else:
+            # Пользователь не подтвердил замену файла
+            print("Замена файла отменена.")
+
+
     def _load_knowledge_from_file(self):
         # load database
+       # self._confirm_replacement()
         directory_path = "vector_db"
         if not os.path.exists(directory_path):
-            print(f"Каталог {directory_path} создан.")
+            print(f"Запущен процесс формирования новой векторной базы {directory_path} создан.")
             try:
                 with open(f'{config.get_KNOWLEDGE_URL()}', 'r') as knowledge_file:
                     text = knowledge_file.read()
@@ -62,6 +77,7 @@ class OpenAIHandler:
             md_header_splits = markdown_splitter.split_text(text)
             self.knowledge_base = FAISS.from_documents(md_header_splits, OpenAIEmbeddings())
             self.knowledge_base.save_local(directory_path)
+            print(f"Каталог {directory_path} создан.")
         else:
             print(f"Каталог {directory_path} уже существует.")
             self.knowledge_base = FAISS.load_local(directory_path, OpenAIEmbeddings())
@@ -101,7 +117,6 @@ class OpenAIHandler:
             messages=messages,
             temperature=temp
         )
-        #print(completion)
 
         cost = self.SELECT_MODEL_GPT[1] * (completion["usage"]["prompt_tokens"] / 1000) + self.SELECT_MODEL_GPT[2] * (
                             completion["usage"]["completion_tokens"] / 1000)

@@ -33,7 +33,7 @@ def run_dialog():
         user_question = input('\nКлиент: ')
         if ((user_question.lower() == 'stop') or (user_question.lower() == 'стоп')):
             break
-        answer = OpenGPT.answer_index(user_question)
+        answer, cost = OpenGPT.answer_index(user_question)
         print('\nМенеджер: ', insert_newlines(answer)+'\n\n')
 
     return
