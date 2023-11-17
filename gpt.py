@@ -5,6 +5,7 @@ from langchain.vectorstores import FAISS
 from langchain.text_splitter import MarkdownHeaderTextSplitter
 import openai
 import config
+import shutil
 
 
 class OpenAIHandler:
@@ -22,12 +23,16 @@ class OpenAIHandler:
 
 
     def __init__(self, summarize_flag=False):
+        print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Подготовка к запуску=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
         openai_key = config.get_SECRET_OPENAI_KEY()
         os.environ["OPENAI_API_KEY"] = openai_key
         openai.api_key = openai_key
 
         self._load_prompt_from_file()
         self._load_knowledge_from_file()
+
+        print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-Этап подготовки завершен! Запуск программы! Задайте вопрос. =-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
+
 
 
     def _load_prompt_from_file(self):
@@ -40,25 +45,32 @@ class OpenAIHandler:
 
 
     # Функция для запроса подтверждения от пользователя
-    def _confirm_replacement():
+    def _confirm_replacement(self):
+        directory_path = "vector_db"
         # Запрос ввода от пользователя
-        user_input = input("Заменить существующий файл Базы знаний? (да/1 для подтверждения): ").lower().strip()
-
-        # Проверка ответа пользователя
-        if user_input == 'да' or user_input == '1':
-            # Пользователь подтвердил замену файла
-            print("Файл заменен.")
+        if not os.path.exists(directory_path):
+            # каталога с векторной базой нет! Нужно создавать новый
+            return True
         else:
-            # Пользователь не подтвердил замену файла
-            print("Замена файла отменена.")
+            # Проверка ответа пользователя
+            print(f"Каталог {directory_path} уже существует.")
+            user_input = input(
+                "Заменить существующий каталог Базы знаний? \n (введите да/нет): ").lower().strip()
+            if user_input == 'да' or user_input == '1':
+                # Пользователь подтвердил замену файла
+                shutil.rmtree(directory_path)
+                print(f"Каталог {directory_path} удален.")
+                return True
+            else:
+                # Пользователь не подтвердил замену файла
+                return False
 
 
     def _load_knowledge_from_file(self):
         # load database
-       # self._confirm_replacement()
         directory_path = "vector_db"
-        if not os.path.exists(directory_path):
-            print(f"Запущен процесс формирования новой векторной базы {directory_path} создан.")
+        if self._confirm_replacement():
+            print(f"Запущен процесс формирования новой векторной базы {directory_path} ")
             try:
                 with open(f'{config.get_KNOWLEDGE_URL()}', 'r') as knowledge_file:
                     text = knowledge_file.read()
@@ -79,7 +91,6 @@ class OpenAIHandler:
             self.knowledge_base.save_local(directory_path)
             print(f"Каталог {directory_path} создан.")
         else:
-            print(f"Каталог {directory_path} уже существует.")
             self.knowledge_base = FAISS.load_local(directory_path, OpenAIEmbeddings())
 
 

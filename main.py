@@ -2,6 +2,8 @@
 from gpt import OpenAIHandler
 import os
 import platform
+os.environ['TERM'] = 'xterm'
+
 
 OpenGPT = OpenAIHandler()
 
