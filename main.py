@@ -1,5 +1,5 @@
 
-from source.gpt import OpenAIHandler
+from gpt import OpenAIHandler
 import os
 import platform
 
@@ -29,14 +29,11 @@ def insert_newlines(textstr: str, max_len: int = 170) -> str:
 
 
 def run_dialog():
-    OpenGPT.setOpenAI()
-    OpenGPT.load_knowledge()
-    OpenGPT.load_promt()
     while True:
         user_question = input('\nКлиент: ')
         if ((user_question.lower() == 'stop') or (user_question.lower() == 'стоп')):
             break
-        answer = gpt.answer_index(user_question)
+        answer = OpenGPT.answer_index(user_question)
         print('\nМенеджер: ', insert_newlines(answer)+'\n\n')
 
     return
