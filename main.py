@@ -30,11 +30,11 @@ def insert_newlines(textstr: str, max_len: int = 170) -> str:
 
 def run_dialog():
     while True:
-        user_question = input('\nКлиент: ')
+        user_question = input('\nВопрос: ')
         if ((user_question.lower() == 'stop') or (user_question.lower() == 'стоп')):
             break
-        answer, cost = OpenGPT.answer_index(user_question)
-        print('\nМенеджер: ', insert_newlines(answer)+'\n\n')
+        answer = OpenGPT.answer_index(user_question)
+        print('\nОтвет: ', insert_newlines(answer)+'')
 
     return
 

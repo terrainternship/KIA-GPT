@@ -84,7 +84,7 @@ class OpenAIHandler:
 
 
     def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=3):
-        print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
+      #  print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
         # Добавляем явное разделение между историей диалога и текущим вопросом
         input_text = "История предидущих диалогов: " + self.summDialog + "\n\nТекущий вопрос: " + topic
 
@@ -93,7 +93,7 @@ class OpenAIHandler:
         #     [f'\nОтрывок документа №{i + 1}\n=====================' + doc.page_content + '\n' for i, doc in
         #      enumerate(docs)]))
 
-        print(f'Вопрос пользователя \n=== {topic} \n')
+       # print(f'Вопрос пользователя \n=== {topic} \n')
 
         docs = self.knowledge_base.similarity_search_with_score(topic, k=top_similar_documents)
         responses = []
@@ -101,9 +101,9 @@ class OpenAIHandler:
             if score < 2:
                 content = doc.page_content
                 response = f'\n====Отрывок документа №{i + 1}=====\n{content}\n'
-                print(f'\n=====================Отрывок документа №{i + 1}=====================\n')
-                print(f'=== score = {score}  Metadata документа ------------ {doc.metadata}')
-                print(f' \n{content}\n')
+              #  print(f'\n=====================Отрывок документа №{i + 1}=====================\n')
+              #  print(f'=== score = {score}  Metadata документа ------------ {doc.metadata}')
+              #  print(f' \n{content}\n')
                 responses.append(response)
 
         messages = [
@@ -118,13 +118,9 @@ class OpenAIHandler:
             temperature=temp
         )
 
-        cost = self.SELECT_MODEL_GPT[1] * (completion["usage"]["prompt_tokens"] / 1000) + self.SELECT_MODEL_GPT[2] * (
-                            completion["usage"]["completion_tokens"] / 1000)
-        print(f'\033[92m ЦЕНА запроса с ответом : {cost}  $ \033[0m')
-
         answer = completion.choices[0].message.content
 
         # Добавляем вопрос пользователя и ответ системы в историю
         self.HISTORY.append((topic, answer if answer is not None else ''))
 
-        return answer, cost  # возвращает ответ
+        return answer  # возвращает ответ
