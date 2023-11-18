@@ -31,16 +31,18 @@
 
 `sudo apt install python3-venv`
 
-5. Создаем виртуальную среду и активируем
+5. Загружаем каталог с проектом
+`git clone -b collab_most_die https://github.com/TasksAndreySorokin/KIA-GPT1.git`
+
+6. Переходим в него
+
+`cd KIA-GPT1`
+
+7. Создаем виртуальную среду и активируем
 
 `python -m venv venv`
 
 `source venv/bin/activate`
-
-6. Загружаем каталог с проектом
-7. Переходим в него
-
-`cd <Имя папки с проектом>`
 
 # Установка библиотек
 Вводим эту команду в консоле для установке в среде.
