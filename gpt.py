@@ -93,11 +93,36 @@ class OpenAIHandler:
         else:
             self.knowledge_base = FAISS.load_local(directory_path, OpenAIEmbeddings())
 
+    def _summarize_topic(self, dialog):
+        messages = [
+            {"role": "system",
+             "content": "Ты - ассистент консультанта, основанный на AI. Ты умеешь профессионально суммаризировать присланные тебе диалоги консультанта и клиента. Твоя задача - суммаризировать диалог, который тебе пришел. Обязательно выбери Имя клиента. Выбери ключевые слова таким образом, чтобы диалог должен быть не более 50 слов"},
+            {"role": "user",
+             "content": "Суммаризируй следующий диалог консультанта и клиента: " + " ".join(dialog)}
+        ]
 
-    def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=3):
+        completion = openai.ChatCompletion.create(
+            model=self.SELECT_MODEL_GPT[0],
+            messages=messages,
+            temperature=0.1,  # Используем более низкую температуру для более определенной суммаризации
+            max_tokens=3000  # Ограничиваем количество токенов для суммаризации
+        )
+        return completion.choices[0].message.content
+    
+    def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=10):
       #  print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
         # Добавляем явное разделение между историей диалога и текущим вопросом
-        input_text = "История предидущих диалогов: " + self.summDialog + "\n\nТекущий вопрос: " + topic
+        if not summarize_flag:
+            self.HISTORY = '' # ОТКЛЮЧАЕТ САММАРИЗАЦИЮ! ЕСТЬ НУЖНО ЕЕ ВКЛЮЧИТЬ ТОГДА ЗАКОММЕНТИРУЙ
+        if len(self.HISTORY) > 0:
+            self.summDialog = self._summarize_topic(
+                ["Вот краткий обзор предыдущего диалога: " + summ +
+                 '\nВопрос клиента: ' + ques + (('. Ответ консультанта: ' + ans)
+                  if ans is not None else '') for summ, ques, ans in self.HISTORY])
+            #print(f'САММАРИ \n=== {insert_newlines(self.summDialog)} \n')
+
+        # Добавляем явное разделение между историей диалога и текущим вопросом
+        input_text = "Вот краткий обзор предыдущего диалога: " + self.summDialog + "\nТекущий вопрос: " + topic
 
         #docs = self.knowledge_base.similarity_search(topic, k=top_similar_documents)
         # message_content = re.sub(r'\n{2}', ' ', '\n '.join(
@@ -106,7 +131,7 @@ class OpenAIHandler:
 
        # print(f'Вопрос пользователя \n=== {topic} \n')
 
-        docs = self.knowledge_base.similarity_search_with_score(topic, k=top_similar_documents)
+        docs = self.knowledge_base.similarity_search_with_score(input_text, k=top_similar_documents)
         responses = []
         for i, (doc, score) in enumerate(docs):
             if score < 2:
@@ -132,6 +157,7 @@ class OpenAIHandler:
         answer = completion.choices[0].message.content
 
         # Добавляем вопрос пользователя и ответ системы в историю
-        self.HISTORY.append((topic, answer if answer is not None else ''))
+        self.HISTORY = []
+        self.HISTORY.append((self.summDialog, topic, answer if answer is not None else ''))
 
         return answer  # возвращает ответ
