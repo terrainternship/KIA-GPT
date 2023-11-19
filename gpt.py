@@ -109,17 +109,7 @@ class OpenAIHandler:
         )
         return completion.choices[0].message.content
     
-    def insert_newlines(self, textstr: str, max_len: int = 170) -> str:
-        words = textstr.split()
-        lines = []
-        current_line = ""
-        for word in words:
-            if len(current_line + " " + word) > max_len:
-                lines.append(current_line)
-                current_line = ""
-            current_line += " " + word
-        lines.append(current_line)
-        return "\n".join(lines)
+
 
     def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=10):
         print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
@@ -131,7 +121,7 @@ class OpenAIHandler:
                 ["Вот краткий обзор предыдущего диалога: " + summ +
                  '\nВопрос клиента: ' + ques + (('. Ответ консультанта: ' + ans)
                   if ans is not None else '') for summ, ques, ans in self.HISTORY])
-            print(f'САММАРИ \n=== {self.insert_newlines(self.summDialog)} \n')
+            print(f'САММАРИ \n=== {self.summDialog} \n')
 
         # Добавляем явное разделение между историей диалога и текущим вопросом
         input_text = "Вот краткий обзор предыдущего диалога: " + self.summDialog + "\nТекущий вопрос: " + topic
