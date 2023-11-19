@@ -112,7 +112,7 @@ class OpenAIHandler:
 
 
     def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=10):
-        print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
+        print('\n\n\033[91m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
         # Добавляем явное разделение между историей диалога и текущим вопросом
         if not config.get_summarize_flag():
             self.HISTORY = '' # ОТКЛЮЧАЕТ САММАРИЗАЦИЮ! ЕСТЬ НУЖНО ЕЕ ВКЛЮЧИТЬ ТОГДА ЗАКОММЕНТИРУЙ
@@ -126,10 +126,6 @@ class OpenAIHandler:
         # Добавляем явное разделение между историей диалога и текущим вопросом
         input_text = "Вот краткий обзор предыдущего диалога: " + self.summDialog + "\nТекущий вопрос: " + topic
 
-        #docs = self.knowledge_base.similarity_search(topic, k=top_similar_documents)
-        # message_content = re.sub(r'\n{2}', ' ', '\n '.join(
-        #     [f'\nОтрывок документа №{i + 1}\n=====================' + doc.page_content + '\n' for i, doc in
-        #      enumerate(docs)]))
 
        # print(f'Вопрос пользователя \n=== {topic} \n')
 

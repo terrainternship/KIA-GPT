@@ -40,11 +40,11 @@ def get_KNOWLEDGE_URL():
         exit(1)
     return value
 
-def get_summarize_flag():
+def SUMMARIZE_ON():
     try:
-        summarize_flag = os.environ['SUMMARIZE_ON']
+        value = os.environ['SUMMARIZE_ON']
     except KeyError:
         print("\033[91m Ошибка: \033[92m переменная окружения SUMMARIZE_ON не установлена! \033[0m")
         # Здесь вы можете предпринять дополнительные действия, например, завершить выполнение программы
         exit(1)
-    return summarize_flag
+    return value
