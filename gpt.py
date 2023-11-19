@@ -111,16 +111,12 @@ class OpenAIHandler:
     
 
 
-    def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=10):
+    def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=3):
         print('\n\n\033[91m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
         # Добавляем явное разделение между историей диалога и текущим вопросом
-        if not config.SUMMARIZE_ON():
-            self.HISTORY = '' # ОТКЛЮЧАЕТ САММАРИЗАЦИЮ! ЕСТЬ НУЖНО ЕЕ ВКЛЮЧИТЬ ТОГДА ЗАКОММЕНТИРУЙ
-        if len(self.HISTORY) > 0:
+        if config.SUMMARIZE_ON():
             self.summDialog = self._summarize_topic(
-                ["Вот краткий обзор предыдущего диалога: " + summ +
-                 '\nВопрос клиента: ' + ques + (('. Ответ консультанта: ' + ans)
-                  if ans is not None else '') for summ, ques, ans in self.HISTORY])
+                ["Вот краткий обзор предыдущего диалога: " + summ + '\nВопрос клиента: ' + ques + (('. Ответ консультанта: ' + ans) if ans is not None else '') for summ, ques, ans in self.HISTORY])
             print(f'САММАРИ \n=== {self.summDialog} \n')
 
         # Добавляем явное разделение между историей диалога и текущим вопросом
@@ -143,7 +139,7 @@ class OpenAIHandler:
         messages = [
             {"role": "system", "content": self.prompt},
             {"role": "user",
-                "content": f"Документ с информацией для ответа пользователю: {responses}\n\nВопрос клиента: \n{input_text}"}
+                "content": f"Документ с информацией для ответа пользователю: {responses} \n\nВопрос клиента: \n {input_text} "}
         ]
 
         completion = openai.ChatCompletion.create(
