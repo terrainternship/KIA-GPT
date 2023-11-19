@@ -114,7 +114,7 @@ class OpenAIHandler:
     def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=10):
         print('\n\n\033[91m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
         # Добавляем явное разделение между историей диалога и текущим вопросом
-        if not config.get_summarize_flag():
+        if not config.SUMMARIZE_ON():
             self.HISTORY = '' # ОТКЛЮЧАЕТ САММАРИЗАЦИЮ! ЕСТЬ НУЖНО ЕЕ ВКЛЮЧИТЬ ТОГДА ЗАКОММЕНТИРУЙ
         if len(self.HISTORY) > 0:
             self.summDialog = self._summarize_topic(
