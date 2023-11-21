@@ -126,7 +126,9 @@ class OpenAIHandler:
 #------------------------
        # self.summDialog = ''
         flag = config.SUMMARIZE_ON()
-        if flag:
+        print(flag)
+        if int(flag) > 1:
+            print('Enter code')
             if len(self.HISTORY) > 0:
                 self.summDialog = self._summarize_topic(
                     ["Вот краткий обзор предыдущего диалога: " + summ + '\nПоследний вопрос клиента: ' + ques + (('. Последний ответ консультанта: ' + ans) if ans is not None else '') for summ, ques, ans in self.HISTORY])
