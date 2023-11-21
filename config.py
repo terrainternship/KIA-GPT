@@ -40,12 +40,24 @@ def get_KNOWLEDGE_URL():
         exit(1)
     return value
 
+# def SUMMARIZE_ON():
+#     '''Функция берет значение саммаризации из энв файла'''
+#     try:
+#         value = os.environ['SUMMARIZE_ON']
+#     except KeyError:
+#         print("\033[91m Ошибка: \033[92m переменная окружения SUMMARIZE_ON не установлена! \033[0m")
+#         # Здесь вы можете предпринять дополнительные действия, например, завершить выполнение программы
+#         exit(1)
+#     return value
+
 def SUMMARIZE_ON():
-    '''Функция берет значение саммаризации из энв файла'''
-    try:
-        value = os.environ['SUMMARIZE_ON']
-    except KeyError:
-        print("\033[91m Ошибка: \033[92m переменная окружения SUMMARIZE_ON не установлена! \033[0m")
+    # Функция берет значение саммаризации из .env файла
+    value = os.getenv('SUMMARIZE_ON')
+    if value == "True":
+        return True
+    elif value == "False":
+        return False
+    else:
+        print("\033[91m Ошибка: \033[92m переменная окружения SUMMARIZE_ON должна быть True or False! \033[0m")
         # Здесь вы можете предпринять дополнительные действия, например, завершить выполнение программы
         exit(1)
-    return value

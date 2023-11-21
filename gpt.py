@@ -14,8 +14,8 @@ class OpenAIHandler:
     MODEL_GPT_3_5_TURBO_INSTRUCT_4K = ['gpt-3.5-turbo-instruct', 0.0015, 0.002]
     MODEL_GPT_4 = ['gpt-4', 0.03, 0.06]  # 8,192 tokens
     MODEL_GPT_4_32K = ['gpt-4-32k', 0.06, 0.12]
-    MODEL_GPT_4_PREVIEW = ['gpt-4-1106-preview', 0.01, 0.03]  
-    MODEL_GPT_4_VISIO = ['gpt-4-1106-preview', 0.01, 0.03]  
+    MODEL_GPT_4_PREVIEW = ['gpt-4-1106-preview', 0.01, 0.03]
+    MODEL_GPT_4_VISIO = ['gpt-4-1106-preview', 0.01, 0.03]
     SELECT_MODEL_GPT = MODEL_GPT_3_5_TURBO_16K
 
     HISTORY = []
@@ -109,37 +109,18 @@ class OpenAIHandler:
             max_tokens=3000  # Ограничиваем количество токенов для суммаризации
         )
         return completion.choices[0].message.content
-    
-    def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=5):
-        print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
-        # Добавляем явное разделение между историей диалога и текущим вопросом
-        # self.summDialog = ''
-        # flag = config.SUMMARIZE_ON()
-        # dont_summarize_flag = not flag
-        # if dont_summarize_flag:     # для отключения суммаризации в .env установи SUMMARIZE_ON=FALSE
-        #     self.HISTORY = ''
-        # if len(self.HISTORY) > 0:
-        #     self.summDialog = self._summarize_topic(
-        #         ["Вот краткий обзор предыдущего диалога: " + summ + '\nВопрос клиента: ' + ques + (('. Ответ консультанта: ' + ans) if ans is not None else '') for summ, ques, ans in self.HISTORY])
-        #     print(f'САММАРИ \n=== {self.summDialog} \n')
 
-#------------------------
-       # self.summDialog = ''
+    def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=10):
+        print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
         flag = config.SUMMARIZE_ON()
-        print(flag)
-        if int(flag) > 1:
-            print('Enter code')
+        if flag:
             if len(self.HISTORY) > 0:
                 self.summDialog = self._summarize_topic(
                     ["Вот краткий обзор предыдущего диалога: " + summ + '\nПоследний вопрос клиента: ' + ques + (('. Последний ответ консультанта: ' + ans) if ans is not None else '') for summ, ques, ans in self.HISTORY])
                 print(f'САММАРИ \n=== {self.summDialog} \n')
 
-#-----------------------
-
-
         # Добавляем явное разделение между историей диалога и текущим вопросом
         input_text = self.summDialog + "\nТекущий вопрос клиента: " + topic
-
 
        # print(f'Вопрос пользователя \n=== {topic} \n')
 
