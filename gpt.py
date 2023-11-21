@@ -113,15 +113,27 @@ class OpenAIHandler:
     def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=5):
         print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
         # Добавляем явное разделение между историей диалога и текущим вопросом
-        self.summDialog = ''
-        flag = config.get_summarize_flag()
-        dont_summarize_flag = not flag
-        if dont_summarize_flag:     # для отключения суммаризации в .env установи SUMMARIZE_ON=FALSE
-            self.HISTORY = ''
-        if len(self.HISTORY) > 0:
-            self.summDialog = self._summarize_topic(
-                ["Вот краткий обзор предыдущего диалога: " + summ + '\nВопрос клиента: ' + ques + (('. Ответ консультанта: ' + ans) if ans is not None else '') for summ, ques, ans in self.HISTORY])
-            print(f'САММАРИ \n=== {self.summDialog} \n')
+        # self.summDialog = ''
+        # flag = config.SUMMARIZE_ON()
+        # dont_summarize_flag = not flag
+        # if dont_summarize_flag:     # для отключения суммаризации в .env установи SUMMARIZE_ON=FALSE
+        #     self.HISTORY = ''
+        # if len(self.HISTORY) > 0:
+        #     self.summDialog = self._summarize_topic(
+        #         ["Вот краткий обзор предыдущего диалога: " + summ + '\nВопрос клиента: ' + ques + (('. Ответ консультанта: ' + ans) if ans is not None else '') for summ, ques, ans in self.HISTORY])
+        #     print(f'САММАРИ \n=== {self.summDialog} \n')
+
+#------------------------
+       # self.summDialog = ''
+        flag = config.SUMMARIZE_ON()
+        if flag:
+            if len(self.HISTORY) > 0:
+                self.summDialog = self._summarize_topic(
+                    ["Вот краткий обзор предыдущего диалога: " + summ + '\nВопрос клиента: ' + ques + (('. Ответ консультанта: ' + ans) if ans is not None else '') for summ, ques, ans in self.HISTORY])
+                print(f'САММАРИ \n=== {self.summDialog} \n')
+
+#-----------------------
+
 
         # Добавляем явное разделение между историей диалога и текущим вопросом
         input_text = "Вот краткий обзор предыдущего диалога: " + self.summDialog + "\nТекущий вопрос: " + topic

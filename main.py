@@ -35,7 +35,7 @@ def run_dialog():
         if ((user_question.lower() == 'stop') or (user_question.lower() == 'стоп')):
             break
         answer = OpenGPT.answer_index(user_question)
-        print('\nОтвет: ', insert_newlines(answer) +'')
+        print('\nОтвет: ', insert_newlines(answer))
 
     return
 

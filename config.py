@@ -41,6 +41,7 @@ def get_KNOWLEDGE_URL():
     return value
 
 def SUMMARIZE_ON():
+    '''Функция берет значение саммаризации из энв файла'''
     try:
         value = os.environ['SUMMARIZE_ON']
     except KeyError:
