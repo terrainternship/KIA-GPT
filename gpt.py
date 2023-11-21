@@ -129,14 +129,14 @@ class OpenAIHandler:
         if flag:
             if len(self.HISTORY) > 0:
                 self.summDialog = self._summarize_topic(
-                    ["Вот краткий обзор предыдущего диалога: " + summ + '\nВопрос клиента: ' + ques + (('. Ответ консультанта: ' + ans) if ans is not None else '') for summ, ques, ans in self.HISTORY])
+                    ["Вот краткий обзор предыдущего диалога: " + summ + '\nПоследний вопрос клиента: ' + ques + (('. Последний ответ консультанта: ' + ans) if ans is not None else '') for summ, ques, ans in self.HISTORY])
                 print(f'САММАРИ \n=== {self.summDialog} \n')
 
 #-----------------------
 
 
         # Добавляем явное разделение между историей диалога и текущим вопросом
-        input_text = "Вот краткий обзор предыдущего диалога: " + self.summDialog + "\nТекущий вопрос: " + topic
+        input_text = self.summDialog + "\nТекущий вопрос клиента: " + topic
 
 
        # print(f'Вопрос пользователя \n=== {topic} \n')
@@ -155,7 +155,7 @@ class OpenAIHandler:
         messages = [
             {"role": "system", "content": self.prompt},
             {"role": "user",
-                "content": f"Документ с информацией для ответа пользователю: {responses} \n\nВопрос клиента: \n {input_text} "}
+                "content": f"Документ с информацией для ответа пользователю: {responses} \n\n{input_text} "}
         ]
 
         completion = openai.ChatCompletion.create(
