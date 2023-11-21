@@ -22,7 +22,8 @@ class OpenAIHandler:
     summDialog = ''
 
 
-    def __init__(self, summarize_flag=False):
+    # def __init__(self, summarize_flag=False):
+    def __init__(self):
         print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Подготовка к запуску=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
         openai_key = config.get_SECRET_OPENAI_KEY()
         os.environ["OPENAI_API_KEY"] = openai_key
@@ -109,12 +110,15 @@ class OpenAIHandler:
         )
         return completion.choices[0].message.content
     
-
-
-    def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=3):
-        print('\n\n\033[91m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
+    def answer_index(self, topic, temp=float(f'{config.get_TEMPERATURE()}'), top_similar_documents=5):
+        print('\n\n\033[93m=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-Новый вопрос=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==--=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=\n\033[0m')
         # Добавляем явное разделение между историей диалога и текущим вопросом
-        if config.SUMMARIZE_ON():
+        self.summDialog = ''
+        flag = config.get_summarize_flag()
+        dont_summarize_flag = not flag
+        if dont_summarize_flag:     # для отключения суммаризации в .env установи SUMMARIZE_ON=FALSE
+            self.HISTORY = ''
+        if len(self.HISTORY) > 0:
             self.summDialog = self._summarize_topic(
                 ["Вот краткий обзор предыдущего диалога: " + summ + '\nВопрос клиента: ' + ques + (('. Ответ консультанта: ' + ans) if ans is not None else '') for summ, ques, ans in self.HISTORY])
             print(f'САММАРИ \n=== {self.summDialog} \n')
@@ -150,7 +154,7 @@ class OpenAIHandler:
 
         answer = completion.choices[0].message.content
 
-        # Добавляем вопрос пользователя и ответ системы в историю
+        # Обнуляем историю, чтобы хранить только последнюю суммаризацию, и добавляем вопрос пользователя и ответ системы в историю
         self.HISTORY = []
         self.HISTORY.append((self.summDialog, topic, answer if answer is not None else ''))
 
