@@ -1,14 +1,54 @@
 # KIA-GPT
-
-**Тестирование:** 
-https://docs.google.com/spreadsheets/d/1dlzmaiKBX8ZxIc-OM9XUrv2vkQVgY1Gs5SYPm9ZZQ8s/edit#gid=1214543959
-
-**База знаний** 
-knowledge/database.txt
-
-**Коллаб для использования** 
-https://colab.research.google.com/drive/1sY-PdWx6TnzMvQDI5wxegFt8USWlDiN3?usp=sharing
+ТУТ БУДЕТ ОПИСАНИЕ
 
 
-Редактор онлайн: https://6d34f4ce7edb.vps.myjino.ru/
+--- 
+## База знаний
+База знаний для Нейро-консультанта : `knowledge/database.md`
 
+Это документ, который используется для поиска необходимой информации по запросу пользователя.
+Изменять его необходимо крайне осторожно, соблюдая структуру файла в формате MarkDown
+
+---
+
+# Установка сервера 
+
+Используется Ubuntu 22.04. Все действия делаем в консоле сервера
+
+1. Обновляем систему
+
+`sudo apt update`
+
+2. Устанавливаем Python
+
+`sudo apt install python3`
+
+3. Устанавливаем pip
+
+`sudo apt install python3-pip`
+
+4. Устанавливаем venv
+
+`sudo apt install python3-venv`
+
+5. Загружаем каталог с проектом
+`git clone -b collab_most_die https://github.com/TasksAndreySorokin/KIA-GPT1.git`
+
+6. Переходим в него
+
+`cd KIA-GPT1`
+
+7. Создаем виртуальную среду и активируем
+
+`python -m venv venv`
+
+`source venv/bin/activate`
+
+# Установка библиотек
+Вводим эту команду в консоле для установке в среде.
+
+`pip install -r requirements.txt`
+
+# Запуск 
+
+`python main.py`
